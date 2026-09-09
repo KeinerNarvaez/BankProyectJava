@@ -1,0 +1,12 @@
+# .gitignore (raíz)
+.env
+
+# IDE
+.idea/
+*.iml
+
+# Backend
+BankBackend/target/
+
+# Frontend
+BankFrontend/bank/node_modules/
