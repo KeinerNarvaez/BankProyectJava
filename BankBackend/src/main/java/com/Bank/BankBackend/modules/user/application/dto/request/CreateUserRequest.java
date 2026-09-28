@@ -13,8 +13,6 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 public class CreateUserRequest {
-    @NotNull(message = "El ID de la sección es obligatorio")
-    private Integer userId;
     @NotBlank(message = "El correo electrónico es obligatorio")
     @Size(max = 100, message = "El correo electrónico no puede superar 100 caracteres")
     @Email
@@ -26,12 +24,6 @@ public class CreateUserRequest {
             message = "La contraseña debe contener al menos una mayúscula, una minúscula, un número y un carácter especial"
     )
     private String password;
-    @NotNull(message = "El campo estado es obligatorio" )
-    private UserStatus userStatus;
     @NotNull(message = "El campo de rol es obligatorio")
     private RolType rolType;
-    @NotNull(message = "El campo fecha de creacion es obligatorio")
-    private LocalDateTime createdAt;
-    @NotNull(message = "La campo fecha de actualización es obligatorio")
-    private LocalDateTime updatedAt;
 }
