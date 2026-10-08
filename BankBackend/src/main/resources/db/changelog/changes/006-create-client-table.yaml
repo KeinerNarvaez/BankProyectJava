@@ -1,0 +1,89 @@
+databaseChangeLog:
+  - changeSet:
+      id: 6
+      author: keiner
+      changes:
+        - createTable:
+            tableName: client
+            columns:
+
+              - column:
+                  name: client_id
+                  type: INT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+
+              - column:
+                  name: type_identify
+                  type: INT
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: name
+                  type: VARCHAR(100)
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: last_name
+                  type: VARCHAR(100)
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: identify_number
+                  type: INT
+                  constraints:
+                    nullable: false
+                    unique: true
+
+              - column:
+                  name: status
+                  type: VARCHAR(20)
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: email
+                  type: VARCHAR(100)
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: birthday
+                  type: DATE
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: created_at
+                  type: TIMESTAMP
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: updated_at
+                  type: TIMESTAMP
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: user_creation
+                  type: INT
+
+        - addForeignKeyConstraint:
+            baseTableName: client
+            baseColumnNames: user_creation
+            referencedTableName: users
+            referencedColumnNames: user_id
+            constraintName: fk_client_users
+
+        - addForeignKeyConstraint:
+            baseTableName: client
+            baseColumnNames: type_identify
+            referencedTableName: type_identify
+            referencedColumnNames: type_identify_id
+            constraintName: fk_client_type_identify

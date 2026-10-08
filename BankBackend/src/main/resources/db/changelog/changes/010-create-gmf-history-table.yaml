@@ -1,0 +1,64 @@
+databaseChangeLog:
+  - changeSet:
+      id: 8
+      author: keiner
+      changes:
+        - createTable:
+            tableName: gmf_history
+            columns:
+
+              - column:
+                  name: gmf_history_id
+                  type: INT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+
+              - column:
+                  name: transaction_id
+                  type: INT
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: account_id
+                  type: INT
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: amount
+                  type: DECIMAL(15,2)
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: operation_type
+                  type: VARCHAR(20)
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: created_at
+                  type: TIMESTAMP
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: refunded_at
+                  type: TIMESTAMP
+
+        - addForeignKeyConstraint:
+            baseTableName: gmf_history
+            baseColumnNames: transaction_id
+            referencedTableName: transactions
+            referencedColumnNames: transaction_id
+            constraintName: fk_gmf_history_transaction
+
+        - addForeignKeyConstraint:
+            baseTableName: gmf_history
+            baseColumnNames: account_id
+            referencedTableName: account
+            referencedColumnNames: account_id
+            constraintName: fk_gmf_history_account
