@@ -53,7 +53,11 @@ public class WithdrawAllUseCase implements WithdrawAllPort {
             throw new AccountDoesNotBelongToClientException();
         }
 
-        if (account.getAccountStatus() != AccountStatus.ACTIVE) {
+        if (account.getAccountStatus() == AccountStatus.CANCELED) {
+            throw new AccountCanceledException();
+        }
+
+        if (account.getAccountStatus() == AccountStatus.INACTIVE) {
             throw new AccountInactiveException();
         }
 

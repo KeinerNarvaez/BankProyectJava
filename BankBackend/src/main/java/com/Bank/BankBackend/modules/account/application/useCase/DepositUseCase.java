@@ -2,10 +2,9 @@ package com.Bank.BankBackend.modules.account.application.useCase;
 
 import com.Bank.BankBackend.modules.account.application.dto.request.DepositRequest;
 import com.Bank.BankBackend.modules.account.application.port.in.DepositPort;
-import com.Bank.BankBackend.modules.account.domain.exception.AccountDoesNotBelongToClientException;
-import com.Bank.BankBackend.modules.account.domain.exception.AccountNotFoundException;
-import com.Bank.BankBackend.modules.account.domain.exception.ClientNotFoundException;
+import com.Bank.BankBackend.modules.account.domain.exception.*;
 import com.Bank.BankBackend.modules.account.domain.model.Account;
+import com.Bank.BankBackend.modules.account.domain.model.AccountStatus;
 import com.Bank.BankBackend.modules.account.domain.model.Client;
 import com.Bank.BankBackend.modules.account.domain.repository.AccountRepository;
 import com.Bank.BankBackend.modules.account.domain.repository.ClientRepository;
@@ -41,6 +40,13 @@ public class DepositUseCase implements DepositPort {
                         new AccountNotFoundException(request.getAccountNumber())
                 );
 
+        if (account.getAccountStatus() == AccountStatus.CANCELED) {
+            throw new AccountCanceledException();
+        }
+
+        if (account.getAccountStatus() == AccountStatus.INACTIVE) {
+            throw new AccountInactiveException();
+        }
         if (!account.getClientId().getClientId().equals(client.getClientId())) {
             throw new AccountDoesNotBelongToClientException();
         }

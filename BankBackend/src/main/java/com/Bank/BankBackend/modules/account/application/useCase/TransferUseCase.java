@@ -2,12 +2,7 @@ package com.Bank.BankBackend.modules.account.application.useCase;
 
 import com.Bank.BankBackend.modules.account.application.dto.request.TransferRequest;
 import com.Bank.BankBackend.modules.account.application.port.in.TransferPort;
-import com.Bank.BankBackend.modules.account.domain.exception.AccountDoesNotBelongToClientException;
-import com.Bank.BankBackend.modules.account.domain.exception.AccountInactiveException;
-import com.Bank.BankBackend.modules.account.domain.exception.AccountNotFoundException;
-import com.Bank.BankBackend.modules.account.domain.exception.ClientNotFoundException;
-import com.Bank.BankBackend.modules.account.domain.exception.InsufficientBalanceException;
-import com.Bank.BankBackend.modules.account.domain.exception.SameAccountTransferException;
+import com.Bank.BankBackend.modules.account.domain.exception.*;
 import com.Bank.BankBackend.modules.account.domain.model.Account;
 import com.Bank.BankBackend.modules.account.domain.model.AccountStatus;
 import com.Bank.BankBackend.modules.account.domain.model.Client;
@@ -68,11 +63,19 @@ public class TransferUseCase implements TransferPort {
             throw new AccountDoesNotBelongToClientException();
         }
 
-        if (originAccount.getAccountStatus() != AccountStatus.ACTIVE) {
+        if (originAccount.getAccountStatus() == AccountStatus.CANCELED) {
+            throw new AccountCanceledException();
+        }
+
+        if (originAccount.getAccountStatus() == AccountStatus.INACTIVE) {
             throw new AccountInactiveException();
         }
 
-        if (destinationAccount.getAccountStatus() != AccountStatus.ACTIVE) {
+        if (destinationAccount.getAccountStatus() == AccountStatus.CANCELED) {
+            throw new AccountCanceledException();
+        }
+
+        if (destinationAccount.getAccountStatus() == AccountStatus.INACTIVE) {
             throw new AccountInactiveException();
         }
 
