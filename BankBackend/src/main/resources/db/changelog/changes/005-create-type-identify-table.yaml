@@ -1,0 +1,35 @@
+databaseChangeLog:
+  - changeSet:
+      id: 5
+      author: keiner
+      changes:
+        - createTable:
+            tableName: type_identify
+            columns:
+
+              - column:
+                  name: type_identify_id
+                  type: INT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+
+              - column:
+                  name: name
+                  type: VARCHAR(20)
+                  constraints:
+                    nullable: false
+                    unique: true
+
+              - column:
+                  name: description
+                  type: VARCHAR(100)
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: status
+                  type: VARCHAR(20)
+                  constraints:
+                    nullable: false

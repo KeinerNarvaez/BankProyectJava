@@ -1,5 +1,8 @@
 package com.Bank.BankBackend.shared.domain.exception;
 
+import lombok.Getter;
+
+@Getter
 public class BusinessException extends RuntimeException{
     private final String code;
 
@@ -8,8 +11,5 @@ public class BusinessException extends RuntimeException{
         this.code = code;
     }
 
-    public String getCode() {
-        return code;
-    }
 }
 

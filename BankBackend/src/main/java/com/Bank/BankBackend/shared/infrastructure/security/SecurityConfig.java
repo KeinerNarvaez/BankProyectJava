@@ -44,12 +44,10 @@ public class SecurityConfig {
     }
 
     @Bean
-    public JwtAuthenticationFilter jwtAuthenticationFilter() {
-        return new JwtAuthenticationFilter(tokenGeneratorPort);
-    }
-
-    @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+
+        JwtAuthenticationFilter jwtAuthenticationFilter =
+                new JwtAuthenticationFilter(tokenGeneratorPort);
 
         http
                 .csrf(AbstractHttpConfigurer::disable)
@@ -66,7 +64,7 @@ public class SecurityConfig {
                 )
 
                 .addFilterBefore(
-                        jwtAuthenticationFilter(),
+                        jwtAuthenticationFilter,
                         UsernamePasswordAuthenticationFilter.class
                 );
 

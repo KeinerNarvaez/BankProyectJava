@@ -106,18 +106,6 @@ public class UserController {
                 ApiResponse.ok(response)
         );
     }
-    
-    /*    @Operation(summary = "Cerrar sesión")
-    @PostMapping("/logout")
-    public ResponseEntity<ApiResponse<String>> logout(
-            @Valid @RequestBody LogoutRequest request) {
-
-        logoutPort.logout(request);
-
-        return ResponseEntity.ok(
-                ApiResponse.ok("")
-        );
-    }*/
 
     @Operation(summary = "Activar la cuenta de un usuario")
     @PostMapping("/activate")
