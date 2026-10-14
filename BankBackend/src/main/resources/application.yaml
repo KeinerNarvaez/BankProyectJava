@@ -2,7 +2,7 @@ spring:
   application:
     name: Banking_api
   profiles:
-    active: dev
+    active: docker
   jpa:
     hibernate:
       ddl-auto: validate
